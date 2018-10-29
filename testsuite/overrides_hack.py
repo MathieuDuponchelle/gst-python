@@ -1,3 +1,4 @@
+'''
 import os
 import gi.overrides
 
@@ -30,3 +31,20 @@ if os.environ.get("GST_ENV"):
                                     "old.sitecustomize.gstuninstalled.py")
     if os.path.exists(old_sitecustomize):
         exec(compile(open(old_sitecustomize).read(), old_sitecustomize, 'exec'))
+'''
+
+import os
+
+try:
+    import mesonconfig
+except ImportError:
+    mesonconfig = None
+
+FILE = os.path.realpath(__file__)
+
+os.environ['PYTHONPATH'] = ':'.join([
+    os.path.abspath(os.path.join(mesonconfig.path)),
+    os.path.abspath(os.path.join(FILE, "../", "../")),
+])
+
+print (os.environ['PYTHONPATH'])
